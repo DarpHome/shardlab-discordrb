@@ -393,20 +393,6 @@ module Discordrb::API::Server
     )
   end
 
-  # Create a server integration
-  # https://discord.com/developers/docs/resources/guild#create-guild-integration
-  def create_integration(token, server_id, type, id, reason = nil)
-    Discordrb::API.request(
-      :guilds_sid_integrations,
-      server_id,
-      :post,
-      "#{Discordrb::API.api_base}/guilds/#{server_id}/integrations",
-      { type: type, id: id },
-      Authorization: token,
-      'X-Audit-Log-Reason': reason
-    )
-  end
-
   # Update integration from server
   # https://discord.com/developers/docs/resources/guild#modify-guild-integration
   def update_integration(token, server_id, integration_id, expire_behavior, expire_grace_period, enable_emoticons)

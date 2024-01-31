@@ -45,13 +45,13 @@ module Discordrb::API::User
 
   # Update user data
   # https://discord.com/developers/docs/resources/user#modify-current-user
-  def update_profile(token, email, password, new_username, avatar, new_password = nil)
+  def update_profile(token, new_username, avatar)
     Discordrb::API.request(
       :users_me,
       nil,
       :patch,
       "#{Discordrb::API.api_base}/users/@me",
-      { avatar: avatar, email: email, new_password: new_password, password: password, username: new_username }.to_json,
+      { avatar: avatar, username: new_username }.to_json,
       Authorization: token,
       content_type: :json
     )
@@ -81,18 +81,6 @@ module Discordrb::API::User
     )
   end
 
-  # Get the DMs for the current user
-  # https://discord.com/developers/docs/resources/user#get-user-dms
-  def user_dms(token)
-    Discordrb::API.request(
-      :users_me_channels,
-      nil,
-      :get,
-      "#{Discordrb::API.api_base}/users/@me/channels",
-      Authorization: token
-    )
-  end
-
   # Create a DM to another user
   # https://discord.com/developers/docs/resources/user#create-dm
   def create_pm(token, recipient_id)
@@ -116,19 +104,6 @@ module Discordrb::API::User
       :get,
       "#{Discordrb::API.api_base}/users/@me/connections",
       Authorization: token
-    )
-  end
-
-  # Change user status setting
-  def change_status_setting(token, status)
-    Discordrb::API.request(
-      :users_me_settings,
-      nil,
-      :patch,
-      "#{Discordrb::API.api_base}/users/@me/settings",
-      { status: status }.to_json,
-      Authorization: token,
-      content_type: :json
     )
   end
 

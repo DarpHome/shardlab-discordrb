@@ -22,7 +22,8 @@ module Discordrb
       deferred_message: 5,
       deferred_update: 6,
       update_message: 7,
-      modal: 9
+      modal: 9,
+      premium_required: 10
     }.freeze
 
     # @return [User, Member] The user that initiated the interaction.

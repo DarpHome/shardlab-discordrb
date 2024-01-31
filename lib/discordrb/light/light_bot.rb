@@ -29,23 +29,10 @@ module Discordrb::Light
       @token = token
     end
 
-    # @return [LightProfile] the details of the user this bot is connected to.
-    def profile
-      response = Discordrb::API::User.profile(@token)
-      LightProfile.new(JSON.parse(response), self)
-    end
-
     # @return [Array<LightServer>] the servers this bot is connected to.
     def servers
       response = Discordrb::API::User.servers(@token)
       JSON.parse(response).map { |e| LightServer.new(e, self) }
-    end
-
-    # Joins a server using an instant invite.
-    # @param code [String] The code part of the invite (for example 0cDvIgU2voWn4BaD if the invite URL is
-    #   https://discord.gg/0cDvIgU2voWn4BaD)
-    def join(code)
-      Discordrb::API::Invite.accept(@token, code)
     end
 
     # Gets the connections associated with this account.
